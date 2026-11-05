@@ -1,0 +1,56 @@
+#include<stdio.h>
+
+int main()
+{
+    float a,b;
+    int choice;
+    printf("Enter first number : " );
+    scanf("%f",&a);
+
+    printf("Enter second number : " );
+    scanf("%f",&b);
+  
+   printf("Choose your Choice \n 1 = Addtion\n 2 = Subtraction\n 3 = Multiplication\n 4 = Division\nEnter Your Choice Number = ");
+    scanf("%d", &choice);
+
+    switch(choice)
+    {
+        case 1:
+            float sum =a+b;
+            printf("Addition is: %.2f \n",sum);
+            break;
+
+        case 2:
+            float sub =a-b;
+            printf("Subtraction is: %.2f \n",sub);
+            break;
+    
+        case 3:
+            float multiplication =a*b;
+            printf("Multiplication is: %.2f \n",multiplication);
+            break;
+     
+        case 4:
+            if(b == 0)
+        {
+            printf("Division by zero is not possible\n");
+        }
+             else
+        {
+            float division = a/b;
+            printf("Division is: %.2f \n", division);
+        }
+            break;
+
+        default:
+            printf("Invaild Choice");
+        
+    }
+     
+    return 0;
+
+}
+
+
+
+
