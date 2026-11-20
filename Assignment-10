@@ -1,0 +1,68 @@
+
+#include <stdio.h>
+#include <time.h>
+
+int main()
+{
+    int year, month, day;
+    int days[12] = {31, 28, 31, 30, 31, 30,
+                    31, 31, 30, 31, 30, 31};
+
+    char *months[12] = {
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+    };
+
+    struct tm date = {0};
+    struct tm *result;
+
+    printf("Enter the year: ");
+    scanf("%d", &year);
+
+    // Check leap year
+    if((year % 400 == 0) ||
+       (year % 4 == 0 && year % 100 != 0))
+    {
+        days[1] = 29;
+    }
+
+    // Find first day of January
+    date.tm_year = year - 1900;
+    date.tm_mon = 0;
+    date.tm_mday = 1;
+    date.tm_isdst = -1;
+
+    mktime(&date);
+    result = &date;
+
+    int firstday = result->tm_wday;
+
+    // Print calendar
+    for(month = 0; month < 12; month++)
+    {
+        printf("\n%s %d\n", months[month], year);
+        printf("Sun Mon Tue Wed Thu Fri Sat\n");
+
+        for(day = 0; day < firstday; day++)
+        {
+            printf("    ");
+        }
+
+        for(day = 1; day <= days[month]; day++)
+        {
+            printf("%3d ", day);
+
+            if((day + firstday) % 7 == 0)
+            {
+                printf("\n");
+            }
+        }
+
+        firstday = (firstday + days[month]) % 7;
+        printf("\n");
+    }
+
+    return 0;
+}
